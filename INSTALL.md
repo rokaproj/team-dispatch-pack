@@ -5,7 +5,8 @@ The **team-dispatch orchestration skill** plus **six role agents** for Claude Co
 ## Prerequisites
 
 - Claude Code installed (check with `claude --version` in a terminal)
-- Nothing else — this pack is markdown files only; installing means copying them into place
+- Nothing else — this pack is markdown files only; install it as a plugin (one command,
+  recommended) or by copying two folders into place
 - Optional: the playbook's "named team" experience (visible teammates coordinated via
   SendMessage/TaskUpdate) requires Claude Code's agent-teams / teammate mode to be enabled.
   Without it the skill still works — owners just run as background subagents instead of
