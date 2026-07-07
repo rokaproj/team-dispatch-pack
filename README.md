@@ -46,9 +46,41 @@ team-dispatch-pack/
    └─ security-reviewer.md
 ```
 
+## Install
+
+Prerequisites: [Claude Code](https://claude.com/claude-code) installed (`claude --version`). This pack is markdown only — installing means copying two folders into `~/.claude/`.
+
+> **Caution:** this overwrites any existing agents with the same names
+> (tech-lead, backend-engineer, frontend-engineer, devops-engineer,
+> qa-engineer, security-reviewer). Back up `~/.claude/agents/` first if
+> you have customized versions.
+
+**macOS / Linux**
+
+```bash
+git clone https://github.com/rokaproj/team-dispatch-pack.git
+cd team-dispatch-pack
+mkdir -p ~/.claude/skills ~/.claude/agents
+cp -r skills/* ~/.claude/skills/
+cp agents/*.md ~/.claude/agents/
+```
+
+**Windows (PowerShell)**
+
+```powershell
+git clone https://github.com/rokaproj/team-dispatch-pack.git
+cd team-dispatch-pack
+New-Item -ItemType Directory -Force -Path "$HOME\.claude\skills", "$HOME\.claude\agents" | Out-Null
+Copy-Item ".\skills\*" "$HOME\.claude\skills\" -Recurse -Force
+Copy-Item ".\agents\*.md" "$HOME\.claude\agents\" -Force
+```
+
+Restart Claude Code, then verify: run `/skills` — **team-dispatch** should appear.
+No git, troubleshooting, or uninstall? See [INSTALL.md](INSTALL.md).
+
 ## Quick start
 
-See [INSTALL.md](INSTALL.md). In short: copy `skills/` and `agents/` into `~/.claude/`, restart Claude Code, then ask for something like:
+Ask Claude Code something like:
 
 > "Review this project with team-dispatch — split it into correctness, security, and test coverage."
 

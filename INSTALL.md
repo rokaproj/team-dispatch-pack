@@ -23,7 +23,7 @@ Clone the repository, then copy the two folders into your Claude Code user direc
 ### macOS / Linux (bash, zsh)
 
 ```bash
-git clone https://github.com/<your-username>/team-dispatch-pack.git
+git clone https://github.com/rokaproj/team-dispatch-pack.git
 cd team-dispatch-pack
 mkdir -p ~/.claude/skills ~/.claude/agents
 cp -r skills/* ~/.claude/skills/
@@ -34,7 +34,7 @@ echo "Installed. Restart Claude Code to pick up the skill and agents."
 ### Windows (PowerShell)
 
 ```powershell
-git clone https://github.com/<your-username>/team-dispatch-pack.git
+git clone https://github.com/rokaproj/team-dispatch-pack.git
 cd team-dispatch-pack
 New-Item -ItemType Directory -Force -Path "$HOME\.claude\skills", "$HOME\.claude\agents" | Out-Null
 Copy-Item ".\skills\*" "$HOME\.claude\skills\" -Recurse -Force
