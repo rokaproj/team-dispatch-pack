@@ -78,13 +78,45 @@ Copy-Item ".\agents\*.md" "$HOME\.claude\agents\" -Force
 Restart Claude Code, then verify: run `/skills` — **team-dispatch** should appear.
 No git, troubleshooting, or uninstall? See [INSTALL.md](INSTALL.md).
 
-## Quick start
+## Usage
 
-Ask Claude Code something like:
+There is nothing to run — team-dispatch is a skill, so Claude Code activates it on its own when a request matches ("run this as a team", "split this across agents", "review fan-out", …). To be explicit, just name it in the prompt, like the examples below.
+
+### Review fan-out — the safest first run (Mode B, read-only)
 
 > "Review this project with team-dispatch — split it into correctness, security, and test coverage."
 
-Review fan-out (mode B) is the safest first run: it is entirely read-only.
+The lead spawns one read-only reviewer per dimension, dedupes their findings, then attaches a dedicated refuter agent to each finding. Only findings that survive refutation are reported — nothing plausible-but-unverified reaches you.
+
+### Feature development dispatch (Mode A)
+
+> "Implement this spec with team-dispatch as a team."
+
+The lead decomposes the spec, freezes the interface contract (types, routes, file ownership, acceptance criteria) and **shows it to you for approval before any agent writes code**. Owners then implement in dependency waves — foundation first — and the lead re-runs typecheck/tests/lint on the combined tree before reporting.
+
+### Refactor / migration (Mode C)
+
+> "Migrate every module from X to Y with team-dispatch."
+
+Targets are discovered first, then transformed with exactly one write owner per file (or worktree isolation), then verified per file.
+
+### Bug investigation (Mode D)
+
+> "Use team-dispatch to find why \<symptom\>. Repro: \<steps\>."
+
+Read-only agents investigate the same bug from different angles (call sites, data, timeline, logs) and the lead reports a synthesis. Code changes start only after you say "go ahead and fix" — then a single fix owner is spawned. For incidents/outages, the pack includes report templates in `skills/team-dispatch/references/incident-templates.md`.
+
+### Docs / onboarding map (Mode E)
+
+> "Map this codebase for onboarding with team-dispatch."
+
+One reader per subsystem, purely parallel and read-only, synthesized into a structured map.
+
+### What to expect on every run
+
+- Obvious 1–3 file changes are done solo — the skill declines to over-orchestrate small tasks.
+- Every run ends with a four-part report: ① what was done ② files changed/created ③ verification results (gates the lead re-ran itself) ④ remaining risks.
+- `git commit` / `push` never happen unless you explicitly ask.
 
 ## Non-negotiables (the checklist the lead runs)
 
