@@ -34,8 +34,11 @@ team-dispatch encodes the discipline that prevents each of these: **freeze the c
 ```
 team-dispatch-pack/
 ├─ README.md
-├─ INSTALL.md                          ← install instructions (copy two folders)
+├─ INSTALL.md                          ← detailed install instructions
 ├─ LICENSE                             ← MIT
+├─ .claude-plugin/
+│  ├─ plugin.json                      ← plugin manifest
+│  └─ marketplace.json                 ← lets you `/plugin marketplace add rokaproj/team-dispatch-pack`
 ├─ skills/
 │  └─ team-dispatch/
 │     ├─ SKILL.md                      ← the orchestration playbook
@@ -52,12 +55,32 @@ team-dispatch-pack/
 
 ## Install
 
-Prerequisites: [Claude Code](https://claude.com/claude-code) installed (`claude --version`). This pack is markdown only — installing means copying two folders into `~/.claude/`.
+Prerequisites: [Claude Code](https://claude.com/claude-code) installed (`claude --version`).
 
-> **Caution:** this overwrites any existing agents with the same names
-> (tech-lead, backend-engineer, frontend-engineer, devops-engineer,
-> qa-engineer, security-reviewer). Back up `~/.claude/agents/` first if
-> you have customized versions.
+### Option 1 — Plugin (recommended)
+
+Inside Claude Code, run:
+
+```
+/plugin marketplace add rokaproj/team-dispatch-pack
+/plugin install team-dispatch@rokaproj
+```
+
+Plugin installs are **non-destructive**: everything is namespaced under the plugin
+(`team-dispatch:tech-lead`, `team-dispatch:backend-engineer`, …), so nothing in your
+`~/.claude/agents/` or `~/.claude/skills/` is touched. If you already have an agent
+with the same name, **yours takes precedence** over the plugin's. Disable or uninstall
+anytime with `/plugin` — your own files are unaffected.
+
+### Option 2 — Manual copy
+
+Copies the two folders into `~/.claude/` directly (agents are then available under
+their plain names, e.g. `tech-lead`).
+
+> **Caution:** unlike the plugin install, this overwrites any existing agents with
+> the same names (tech-lead, backend-engineer, frontend-engineer, devops-engineer,
+> qa-engineer, security-reviewer). Back up `~/.claude/agents/` first if you have
+> customized versions.
 
 **macOS / Linux**
 
@@ -79,7 +102,8 @@ Copy-Item ".\skills\*" "$HOME\.claude\skills\" -Recurse -Force
 Copy-Item ".\agents\*.md" "$HOME\.claude\agents\" -Force
 ```
 
-Restart Claude Code, then verify: run `/skills` — **team-dispatch** should appear.
+Restart Claude Code, then verify: run `/skills` — **team-dispatch** should appear
+(as `team-dispatch:team-dispatch` if you installed the plugin).
 No git? Skill not showing up? Want to uninstall? See [INSTALL.md](INSTALL.md).
 
 ## Usage

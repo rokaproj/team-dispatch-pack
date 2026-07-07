@@ -1,0 +1,21 @@
+{
+  "name": "rokaproj",
+  "owner": {
+    "name": "rokaproj"
+  },
+  "description": "Plugins by rokaproj — team-dispatch: safe parallel subagent orchestration for Claude Code.",
+  "plugins": [
+    {
+      "name": "team-dispatch",
+      "source": "./",
+      "description": "Team-orchestration playbook: fan one task out to parallel subagents without collisions — contract freeze, one writer per file, dependency waves, adversarial verification. Includes six role agents.",
+      "category": "workflows",
+      "tags": [
+        "orchestration",
+        "subagents",
+        "parallel",
+        "code-review"
+      ]
+    }
+  ]
+}

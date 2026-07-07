@@ -1,0 +1,20 @@
+{
+  "name": "team-dispatch",
+  "displayName": "team-dispatch",
+  "version": "1.0.0",
+  "description": "Team-orchestration playbook for Claude Code: fan one task out to parallel subagents without collisions — contract freeze, one writer per file, dependency waves, adversarial verification. Includes six role agents.",
+  "author": {
+    "name": "rokaproj"
+  },
+  "homepage": "https://github.com/rokaproj/team-dispatch-pack",
+  "repository": "https://github.com/rokaproj/team-dispatch-pack",
+  "license": "MIT",
+  "keywords": [
+    "orchestration",
+    "subagents",
+    "parallel",
+    "team",
+    "code-review",
+    "refactoring"
+  ]
+}

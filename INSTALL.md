@@ -11,14 +11,37 @@ The **team-dispatch orchestration skill** plus **six role agents** for Claude Co
   Without it the skill still works — owners just run as background subagents instead of
   visible panes, so expect less live visibility, not missing functionality.
 
-## Install
+## Install — Option 1: Plugin (recommended)
+
+Inside Claude Code, run:
+
+```
+/plugin marketplace add rokaproj/team-dispatch-pack
+/plugin install team-dispatch@rokaproj
+```
+
+Then run `/reload-plugins` (or restart Claude Code).
+
+Why this is the safe path:
+
+- **Nothing of yours is overwritten.** The plugin is installed into Claude Code's
+  plugin cache (`~/.claude/plugins/`), not into `~/.claude/agents/` or `~/.claude/skills/`.
+- **Everything is namespaced** — the skill appears as `team-dispatch:team-dispatch`,
+  the agents as `team-dispatch:tech-lead`, `team-dispatch:backend-engineer`, and so on.
+- **Your same-named agents win.** If you already have your own `tech-lead` in
+  `~/.claude/agents/`, it takes precedence over the plugin's version.
+- **Clean removal** — `/plugin uninstall team-dispatch@rokaproj` (or `/plugin disable`
+  to keep it around) leaves your own files untouched.
+
+## Install — Option 2: Manual copy
 
 Clone the repository, then copy the two folders into your Claude Code user directory.
+Agents are then available under their plain names (`tech-lead`, not `team-dispatch:tech-lead`).
 
-> **Caution:** the copy overwrites any existing agents with the same names
-> (backend-engineer, frontend-engineer, devops-engineer, qa-engineer,
-> security-reviewer, tech-lead). If you have customized versions, back up
-> `~/.claude/agents/` first.
+> **Caution:** unlike the plugin install, the copy overwrites any existing agents
+> with the same names (backend-engineer, frontend-engineer, devops-engineer,
+> qa-engineer, security-reviewer, tech-lead). If you have customized versions,
+> back up `~/.claude/agents/` first.
 
 ### macOS / Linux (bash, zsh)
 
@@ -46,9 +69,11 @@ No git? Download the repo as a ZIP from GitHub (**Code → Download ZIP**), extr
 
 ## Verify the install
 
-1. Restart Claude Code (open a new session).
-2. Run `/skills` — **team-dispatch** should appear in the list.
-3. Ask Claude "list the available agents" — tech-lead, backend-engineer, and the other four should be included.
+1. Restart Claude Code (open a new session), or `/reload-plugins` for the plugin install.
+2. Run `/skills` — **team-dispatch** should appear in the list
+   (as `team-dispatch:team-dispatch` for the plugin install).
+3. Ask Claude "list the available agents" — tech-lead, backend-engineer, and the other four
+   should be included (prefixed with `team-dispatch:` for the plugin install).
 
 If the skill doesn't show up, check that the path is exactly
 `~/.claude/skills/team-dispatch/SKILL.md` — an extra nested folder from extraction is the usual cause.
@@ -75,5 +100,6 @@ The skill matches automatically on requests like these:
 
 ## Uninstall
 
-Reverse the install: delete `~/.claude/skills/team-dispatch/` and the six agent
-`.md` files from `~/.claude/agents/`.
+- **Plugin install:** `/plugin uninstall team-dispatch@rokaproj` — your own files are untouched.
+- **Manual copy:** delete `~/.claude/skills/team-dispatch/` and the six agent
+  `.md` files from `~/.claude/agents/`.
