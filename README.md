@@ -1,5 +1,9 @@
 # team-dispatch
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Markdown only](https://img.shields.io/badge/dependencies-none%20%C2%B7%20markdown%20only-blue.svg)](#whats-in-the-box)
+[![Made for Claude Code](https://img.shields.io/badge/made%20for-Claude%20Code-d97757.svg)](https://claude.com/claude-code)
+
 A team-orchestration playbook for [Claude Code](https://claude.com/claude-code): fan one task out to multiple subagents in parallel **without them colliding**, then integrate and verify the results in one place.
 
 Markdown only — one skill plus six role agents. No scripts, no binaries, no dependencies.
@@ -76,7 +80,7 @@ Copy-Item ".\agents\*.md" "$HOME\.claude\agents\" -Force
 ```
 
 Restart Claude Code, then verify: run `/skills` — **team-dispatch** should appear.
-No git, troubleshooting, or uninstall? See [INSTALL.md](INSTALL.md).
+No git? Skill not showing up? Want to uninstall? See [INSTALL.md](INSTALL.md).
 
 ## Usage
 
@@ -102,7 +106,7 @@ Targets are discovered first, then transformed with exactly one write owner per 
 
 ### Bug investigation (Mode D)
 
-> "Use team-dispatch to find why \<symptom\>. Repro: \<steps\>."
+> "Use team-dispatch to find why `<symptom>`. Repro: `<steps>`."
 
 Read-only agents investigate the same bug from different angles (call sites, data, timeline, logs) and the lead reports a synthesis. Code changes start only after you say "go ahead and fix" — then a single fix owner is spawned. For incidents/outages, the pack includes report templates in `skills/team-dispatch/references/incident-templates.md`.
 
